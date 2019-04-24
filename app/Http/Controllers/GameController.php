@@ -48,6 +48,7 @@ class GameController extends Controller
         $game->price = $request->input('price');
 
         $game->save();
+
         return response()->json($game,201);
     }
 
