@@ -21,4 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('game')->group(function(){
     Route::post('criar/','GameController@store');
+    Route::delete('remover/{id}','GameController@destroy');
 });

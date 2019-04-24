@@ -35,8 +35,20 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $game = new Game();
+
+        /**
+         * SOMENTE PARA OS TESTE DE DELETE
+         * FOI NECESSÁRIO CRIAR UM COM ID FIXO PARA TESTAR O DELETE
+         */
+        if($request->input('id')){
+            $game->id = $request->input('id');    
+        }
+        $game->open = $request->input('open');
+        $game->quantity = $request->input('quantity');
+        $game->price = $request->input('price');
+
         $game->save();
-        return response($game,201);
+        return response()->json($game,201);
     }
 
     /**
@@ -81,6 +93,7 @@ class GameController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $game = Game::find($id);
+        $game->delete();
     }
 }
