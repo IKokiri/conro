@@ -17,6 +17,7 @@ class CreateGameGamersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger('gamer_id');
+            $table->integer('score')->default(0);
             $table->foreign('game_id')->references('id')->on('games');
             $table->foreign('gamer_id')->references('id')->on('gamers');
             $table->timestamps();
