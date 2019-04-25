@@ -36,7 +36,6 @@ class GamerController extends Controller
     {
         $gamer = new Gamer();
         $gamer->nickname = $request->input('nickname');
-        $gamer->score = $request->input('score');
         $gamer->save();
 
         return response()->json($gamer,201);

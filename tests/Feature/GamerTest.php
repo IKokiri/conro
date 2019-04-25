@@ -24,8 +24,7 @@ class GamerTest extends TestCase
      */
     public function testStore(){
         $dados = [
-            'nickname'=>'lz',
-            'score'=>1
+            'nickname'=>'lz'
         ];
 
         $response = $this->json('POST','/api/gamer/criar',$dados);
