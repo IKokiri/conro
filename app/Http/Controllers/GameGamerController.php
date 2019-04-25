@@ -42,6 +42,34 @@ class GameGamerController extends Controller
         return response()->json($gameGamer,201);
     }
 
+      /**
+     * Atualiza a pontuação de um jogador
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addScore(Request $request){
+
+        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>1])->where(['gamer_id'=>1])->first();;
+        $gameGamer->score++;
+        $gameGamer->save();
+        return response()->json($gameGamer,200);
+    }
+
+       /**
+     * Atualiza a pontuação de um jogador
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function subScore(Request $request){
+
+        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>1])->where(['gamer_id'=>1])->first();;
+        $gameGamer->score--;
+        $gameGamer->save();
+        return response()->json($gameGamer,200);
+    }
+
     /**
      * Display the specified resource.
      *
