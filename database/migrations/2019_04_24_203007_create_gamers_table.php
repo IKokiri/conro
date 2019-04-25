@@ -16,7 +16,6 @@ class CreateGamersTable extends Migration
         Schema::create('gamers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nickname');
-            $table->integer('score')->default(0);
             $table->timestamps();
         });
     }
