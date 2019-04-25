@@ -27,3 +27,8 @@ Route::prefix('game')->group(function(){
 Route::prefix('gamer')->group(function(){
     Route::post('criar/','GamerController@store');
 });
+
+Route::prefix('gameGamer')->group(function(){
+    Route::post('criar/','GameGamerController@store');
+});
+

@@ -6,26 +6,21 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class GameTest extends TestCase
+class GamerGameTest extends TestCase
 {
-  
-    private $id;
+    
     /**
-     * Testando a criação de jogo
+     * Teste de adição de jogador em jogo
      */
     public function testStore(){
 
         $dados = [
-            'open'=>true,
-            'price'=>0.5,
-            'quantity'=>1
+            'game_id'=>1,
+            'gamer_id'=>1
         ];
 
-        $response = $this->json('POST','/api/game/criar',$dados);
+        $response = $this->json('POST','/api/gameGamer/criar',$dados);
         $response->assertStatus(201);
-
     }
-
-
 
 }

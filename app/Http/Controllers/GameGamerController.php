@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Game;
-class GameController extends Controller
+use App\GameGamer;
+
+class GameGamerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +24,6 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -34,15 +34,12 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $game = new Game();
-
-        $game->open = $request->input('open');
-        $game->quantity = $request->input('quantity');
-        $game->price = $request->input('price');
-
-        $game->save();
-
-        return response()->json($game,201);
+        
+        $gameGamer = new GameGamer();
+        $gameGamer->game_id = $request->input('game_id');
+        $gameGamer->gamer_id = $request->input('gamer_id');
+        $gameGamer->save();
+        return response()->json($gameGamer,201);
     }
 
     /**
@@ -87,7 +84,6 @@ class GameController extends Controller
      */
     public function destroy($id)
     {
-        $game = Game::find($id);
-        $game->delete();
+        //
     }
 }
