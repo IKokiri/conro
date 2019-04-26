@@ -25,6 +25,24 @@ class GameTest extends TestCase
 
     }
 
+    /**
+     * @depends testStore
+     * Teste para não posibilitar inserção de um novo jogo se o ultimo estiver fechado
+     * o testSotore cria um jogo aberto, dessa forma não deve ser necessário abrir outro jogo sem
+     * fechar o atual.
+     */
+    public function testStoreOpen(){
+
+        $dados = [
+            'open'=>true,
+            'price'=>0.5,
+            'quantity'=>1
+        ];
+
+        $response = $this->json('POST','/api/game/criar',$dados);
+        $response->assertStatus(403);
+
+    }
 
 
 }
