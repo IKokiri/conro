@@ -38,7 +38,9 @@ class GameController extends Controller
          * verifica se existe algum jogo aberto, caso exista não é possivel criar um novo jogo
          */
         $gameCheck = $this->checkOpenGame();
-        if($gameCheck){
+        
+
+        if($gameCheck->count()){
             return response()->json($gameCheck,403);
         }
         
@@ -47,7 +49,6 @@ class GameController extends Controller
          */
         $game = new Game();
 
-        $game->price = $request->input('price');
 
         $game->save();
 
@@ -60,10 +61,9 @@ class GameController extends Controller
      */
     private function checkOpenGame(){
 
-        $game = Game::firstOrFail()->where([
+        $game = Game::where([
             'open'=>1
-        ])->first();
-
+        ])->get();
         return $game;
     }
 
