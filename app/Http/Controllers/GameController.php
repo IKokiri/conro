@@ -48,8 +48,7 @@ class GameController extends Controller
          * cria o jogo
          */
         $game = new Game();
-
-
+        $game->price = $request->input('price');
         $game->save();
 
         return response()->json($game,201);

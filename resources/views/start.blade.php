@@ -75,6 +75,8 @@ function criarJogo(){
     dados = response.data;
     document.getElementById('numJogo').innerHTML = dados.id;
     document.getElementById('valorGame').innerHTML = dados.price;
+  }).catch(function(response){
+    
   })
 }
 
