@@ -36,8 +36,6 @@ class GameController extends Controller
     {
         $game = new Game();
 
-        $game->open = $request->input('open');
-        $game->quantity = $request->input('quantity');
         $game->price = $request->input('price');
 
         $game->save();

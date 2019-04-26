@@ -12,6 +12,32 @@
 
 <div class="card text-center">
   <div class="card-header">
+
+    <div class="row">
+      <div class="col-3">
+        <button type="button" class="btn btn-light">
+          <i class="fas fa-dice" id="numJogo"></i>
+        </button>
+      </div>
+
+      <div class="col-3">
+        <button type="button" class="btn btn-light">
+          <i class="fas fa-user-plus"></i>
+        </button>
+      </div>
+
+      <div class="col-3">
+        <button type="button" class="btn btn-light">
+          <i class="fas fa-dollar-sign" id="valorGame"></i>
+        </button>
+      </div>
+
+      <div class="col-3">
+        <button type="button" class="btn btn-light">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
     
   </div>
   <div class="card-body">
@@ -43,9 +69,12 @@ function criarJogo(){
     method: 'post',
     url: 'http://localhost:8000/api/game/criar',
     data: {
+      price: '0.5'
     }
   }).then(function(response){
-    console.log(response);
+    dados = response.data;
+    document.getElementById('numJogo').innerHTML = dados.id;
+    document.getElementById('valorGame').innerHTML = dados.price;
   })
 }
 
