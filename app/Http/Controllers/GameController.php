@@ -41,7 +41,7 @@ class GameController extends Controller
         if($gameCheck){
             return response()->json($gameCheck,403);
         }
-
+        // echo $request->input('price')."ss";die;
         /**
          * cria o jogo
          */
