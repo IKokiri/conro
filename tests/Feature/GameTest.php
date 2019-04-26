@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class GameTest extends TestCase
 {
   
-    private $id;
     /**
      * Testando a criação de jogo
      */
