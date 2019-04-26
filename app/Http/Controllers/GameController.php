@@ -39,9 +39,12 @@ class GameController extends Controller
          */
         $gameCheck = $this->checkOpenGame();
         
-
+        /**
+         * Na tentativa de iniciar um novo jogo, caso já exista algum jogo aberto, este será
+         * retornado para o usuário
+         */
         if($gameCheck->count()){
-            return response()->json($gameCheck,403);
+            return response()->json($gameCheck[0],200);
         }
         
         /**

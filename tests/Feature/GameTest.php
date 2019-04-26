@@ -37,7 +37,7 @@ class GameTest extends TestCase
         ];
 
         $response = $this->json('POST','/api/game/criar',$dados);
-        $response->assertStatus(403);
+        $response->assertStatus(200);
 
     }
 
