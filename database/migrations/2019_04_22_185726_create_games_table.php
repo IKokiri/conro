@@ -16,8 +16,7 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('open')->default(true);
-            $table->decimal('price',8,2)->default(0.5);
-            $table->integer('quantity')->default(0);
+            $table->decimal('price');
             $table->timestamps();
         });
     }

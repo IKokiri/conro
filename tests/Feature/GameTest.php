@@ -33,8 +33,7 @@ class GameTest extends TestCase
 
         $dados = [
             'open'=>true,
-            'price'=>0.5,
-            'quantity'=>1
+            'price'=>0.5
         ];
 
         $response = $this->json('POST','/api/game/criar',$dados);

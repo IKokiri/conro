@@ -14,8 +14,7 @@ class GamesTableSeeder extends Seeder
     {
         DB::table('games')->insert([
             'open' => 0,
-            'price' => 0.5,
-            'quantity' => 1
+            'price' => 0.5
         ]);
     }
 }
