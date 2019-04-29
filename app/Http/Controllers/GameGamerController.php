@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\GamerController;
 use Illuminate\Http\Request;
 use App\GameGamer;
 
@@ -118,10 +119,28 @@ class GameGamerController extends Controller
      * Criação de usuário quando não existe e adição no jogo
      */
     public function createGamerGame(Request $request){
-        
+        /**
+         * Busca no banco existencia de gamer
+         */
         $game_id = $request->input('game_id');
         $nickname = $request->input('nickname');
+        $gamer = new GamerController();
+        
+        $gr = $gamer->findGamerNick($request);
+        
+        /**
+         * CASO O USUÁRIO NÃO EXISTA NO BANCO, SERÁ CRIADO
+         */
+        if(!$gr){
+            $gr = $gamer->store($request);
+            $gr = json_decode($gr->getContent());
+        }
 
+        $request->request->add(['gamer_id'=>$gr->id]);
 
+        $gameGamer = $this->store($request);
+        
+        return response()->json($gameGamer,201);
+        
     }
 }
