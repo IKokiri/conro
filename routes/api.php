@@ -23,7 +23,7 @@ Route::prefix('game')->group(function(){
     Route::post('criar/','GameController@store');
     Route::delete('remover/{id}','GameController@destroy');
     Route::post('close','GameController@closeGame');
-    Route::post('lastClosedGame','GameController@lastClosedGame');
+    Route::post('openGameClosed','GameController@openGameClosed');
 });
 
 Route::prefix('gamer')->group(function(){

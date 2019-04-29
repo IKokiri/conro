@@ -64,8 +64,19 @@ class GameTest extends TestCase
     /**
      *Abre um jogo fechado
      */
-    public function testOpenGameClosed(){
+    public function testOpenClosedGame(){
 
+        $game = new GameController();
+        $g = $game->lastClosedGame();
+        
+        $id = $g->id;
+
+        $dados = [
+            'id'=> $id
+        ];
+
+        $response = $this->json("POST","/api/game/openGameClosed",$dados);
+        $response->assertStatus(200);
     }
 
 

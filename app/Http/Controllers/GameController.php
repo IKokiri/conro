@@ -78,8 +78,8 @@ class GameController extends Controller
         $game = Game::where([
             'open'=>0,
         ])->orderBy('id','asc')->get()->last();
-
-        return response()->json($game,200);
+            
+        return $game;
     }
   
     /**
@@ -139,6 +139,19 @@ class GameController extends Controller
 
         $game->open = false;
 
+        $game->save();
+
+        return response()->json($game,200);
+
+    }
+    /**
+     * Abre o jogo jogo fechado
+     */
+    public function  openGameClosed(Request $request){
+
+        $id = $request->input('id');
+        $game = Game::find($id);
+        $game->open = true;
         $game->save();
 
         return response()->json($game,200);
