@@ -33,7 +33,7 @@
       </div>
 
       <div class="col-3">
-        <button type="button" class="btn btn-light">
+        <button type="button" id="fecharJogo" data-id="" class="btn btn-light" onclick="fecharJogo(this.getAttribute('data-id'))">
           <i class="fas fa-times"></i>
         </button>
       </div>
@@ -41,8 +41,61 @@
     
   </div>
   <div class="card-body">
-   
+
+    <div class="row">
+        <div class="col-12">        
+          <div class="alert alert-primary" role="alert">
+            <button class="btn btn-link btn-block">LZ</button>
+          </div>
+        </div>   
+        <div class="col-6">        
+          <div class="alert alert-primary" role="alert">
+            <input class="form-control" id="nickname" type="text">
+          </div>
+        </div>  
+        <div class="col-6">        
+          <div class="alert alert-secondary" role="alert">
+            <button class="btn btn-link" id="adicionarJogador">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>  
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4">        
+        <div class="alert alert-primary" role="alert">
+          LZ
+        </div>
+      </div>   
+      <div class="col-4">        
+        <div class="alert alert-primary" role="alert">
+          LZ
+        </div>
+      </div>  
+      <div class="col-4">        
+        <div class="alert alert-primary" role="alert">
+          LZ
+        </div>
+      </div>  
+      <div class="col-4">        
+        <div class="alert alert-primary" role="alert">
+          LZ
+        </div>
+      </div>  
+      <div class="col-4">        
+        <div class="alert alert-primary" role="alert">
+          LZ
+        </div>
+      </div>  
+    </div>
+    
+
+
   </div>
+
   <div class="card-footer text-muted">
   <footer>
   
@@ -63,11 +116,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script>
+var url = "http://localhost:8000/";
 
 function criarJogo(){
   axios({
     method: 'post',
-    url: 'http://localhost:8000/api/game/criar',
+    url: url+'api/game/criar',
     data: {
       price: '0.5'
     }
@@ -75,8 +129,22 @@ function criarJogo(){
     dados = response.data;
     document.getElementById('numJogo').innerHTML = dados.id;
     document.getElementById('valorGame').innerHTML = dados.price;
+    document.querySelector('#fecharJogo').setAttribute('data-id',dados.id);
   }).catch(function(response){
     
+  })
+}
+
+function fecharJogo(game){
+
+  axios({
+    method:'post',
+    url: url+'api/game/close',
+    data:{
+      id:game
+    }
+  }).then(function(response){
+
   })
 }
 
