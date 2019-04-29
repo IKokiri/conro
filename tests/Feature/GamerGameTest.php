@@ -54,7 +54,15 @@ class GamerGameTest extends TestCase
     /**
      * A partir de um jogo já criado um jogador será criado e inserido no jogo já criado
      */
-    // public function testCommandGamerCreateGame(){
+    public function testCreateGamerGame(){
         
-    // }
+        $dados = [
+            'game_id' => 2,
+            'nickname' => 'LZ'
+        ];
+
+        $response = $this->json("POST",'api/gameGamer/createGamerGame',$dados);
+        $response->assertStatus(201);
+    }
+
 }

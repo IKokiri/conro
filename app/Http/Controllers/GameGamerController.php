@@ -114,4 +114,14 @@ class GameGamerController extends Controller
     {
         //
     }
+    /**
+     * Criação de usuário quando não existe e adição no jogo
+     */
+    public function createGamerGame(Request $request){
+        
+        $game_id = $request->input('game_id');
+        $nickname = $request->input('nickname');
+
+
+    }
 }

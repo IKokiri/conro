@@ -34,5 +34,6 @@ Route::prefix('gameGamer')->group(function(){
     Route::post('criar/','GameGamerController@store');
     Route::post('addScore/','GameGamerController@addScore');
     Route::post('subScore/','GameGamerController@subScore');
+    Route::post('createGamerGame/','GameGamerController@createGamerGame');
 });
 
