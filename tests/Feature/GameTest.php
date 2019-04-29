@@ -45,7 +45,7 @@ class GameTest extends TestCase
      * @depends testStoreOpen
      * Faz o fechamento de um jogo aberto
      */
-    public function testeCloseGame(){
+    public function testCloseGame(){
         
         $game = new GameController();
         $g = $game->checkOpenGame();
@@ -58,6 +58,13 @@ class GameTest extends TestCase
 
         $response = $this->json("POST",'/api/game/close',$dados);
         $response->assertStatus(200);
+
+    }
+
+    /**
+     *Abre um jogo fechado
+     */
+    public function testOpenGameClosed(){
 
     }
 

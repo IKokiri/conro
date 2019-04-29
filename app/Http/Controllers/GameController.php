@@ -70,6 +70,17 @@ class GameController extends Controller
         return $game;
     }
 
+    /**
+     * Busca o ultimo jogo fechado
+     */
+    public function lastClosedGame(){
+        
+        $game = Game::where([
+            'open'=>0,
+        ])->orderBy('id','asc')->get()->last();
+
+        return response()->json($game,200);
+    }
   
     /**
      * Display the specified resource.
@@ -133,5 +144,7 @@ class GameController extends Controller
         return response()->json($game,200);
 
     }
+
+
 
 }
