@@ -61,14 +61,16 @@ class GameController extends Controller
      * Verifica se existe algum jogo aberto
      * @return Game
      */
-    private function checkOpenGame(){
+    public function checkOpenGame(){
 
         $game = Game::where([
             'open'=>1
         ])->get();
+
         return $game;
     }
 
+  
     /**
      * Display the specified resource.
      *
@@ -77,7 +79,7 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -114,4 +116,22 @@ class GameController extends Controller
         $game = Game::find($id);
         $game->delete();
     }
+
+    /**
+     * Fecha um jogo aberto
+     */
+    public function closeGame(Request $request){
+
+        $id = $request->input('id');
+
+        $game = Game::find($id);
+
+        $game->open = false;
+
+        $game->save();
+
+        return response()->json($game,200);
+
+    }
+
 }

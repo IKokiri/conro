@@ -1,7 +1,7 @@
 <?php
 
 namespace Tests\Feature;
-
+use App\Http\Controllers\GameController;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -37,6 +37,26 @@ class GameTest extends TestCase
         ];
 
         $response = $this->json('POST','/api/game/criar',$dados);
+        $response->assertStatus(200);
+
+    }
+
+    /**
+     * @depends testStoreOpen
+     * Faz o fechamento de um jogo aberto
+     */
+    public function testeCloseGame(){
+        
+        $game = new GameController();
+        $g = $game->checkOpenGame();
+        
+        $id = $g[0]->id;
+
+        $dados = [
+            'id'=>$id
+        ];
+
+        $response = $this->json("POST",'/api/game/close',$dados);
         $response->assertStatus(200);
 
     }
