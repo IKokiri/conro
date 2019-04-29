@@ -50,4 +50,11 @@ class GamerGameTest extends TestCase
         $response = $this->json('POST','/api/gameGamer/subScore',$dados);
         $response->assertStatus(200);
     }
+
+    /**
+     * A partir de um jogo já criado um jogador será criado e inserido no jogo já criado
+     */
+    public function testCommandGamerCreateGame(){
+
+    }
 }
