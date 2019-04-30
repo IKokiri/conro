@@ -13,7 +13,7 @@ class GamerController extends Controller
      */
     public function index()
     {
-        //
+        return $gamers = Gamer::all();
     }
 
     /**

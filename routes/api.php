@@ -27,6 +27,7 @@ Route::prefix('game')->group(function(){
 });
 
 Route::prefix('gamer')->group(function(){
+    Route::get('/','GamerController@index');
     Route::post('criar/','GamerController@store');
 });
 
