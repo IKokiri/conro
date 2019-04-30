@@ -16,5 +16,6 @@ class GamesTableSeeder extends Seeder
             'open' => 0,
             'price' => 0.5
         ]);
+        
     }
 }

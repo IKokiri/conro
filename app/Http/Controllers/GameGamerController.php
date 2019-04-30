@@ -51,7 +51,7 @@ class GameGamerController extends Controller
      */
     public function addScore(Request $request){
 
-        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>1])->where(['gamer_id'=>1])->first();;
+        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>1])->where(['gamer_id'=>1])->first();
         $gameGamer->score++;
         $gameGamer->save();
         return response()->json($gameGamer,200);
