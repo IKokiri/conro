@@ -64,32 +64,9 @@
 
     <hr>
 
-    <div class="row">
-      <div class="col-4">        
-        <div class="alert alert-primary" role="alert">
-          LZ
-        </div>
-      </div>   
-      <div class="col-4">        
-        <div class="alert alert-primary" role="alert">
-          LZ
-        </div>
-      </div>  
-      <div class="col-4">        
-        <div class="alert alert-primary" role="alert">
-          LZ
-        </div>
-      </div>  
-      <div class="col-4">        
-        <div class="alert alert-primary" role="alert">
-          LZ
-        </div>
-      </div>  
-      <div class="col-4">        
-        <div class="alert alert-primary" role="alert">
-          LZ
-        </div>
-      </div>  
+    <div class="row" id="jogadores">
+      
+      
     </div>
     
 
@@ -119,6 +96,8 @@
 // var url = "http://localhost:8000/";
 var url="";
 
+
+
 function criarJogo(){
   axios({
     method: 'post',
@@ -132,9 +111,33 @@ function criarJogo(){
     document.getElementById('valorGame').innerHTML = dados.price;
     document.querySelector('#fecharJogo').setAttribute('data-id',dados.id);
     document.querySelector('#numJogo').setAttribute('data-id',dados.id);
+    carregarJogadores();
   }).catch(function(response){
     
   })
+}
+
+function carregarJogadores(){
+
+  axios({
+    method: 'get',
+    url: url+'api/gamer'
+  }).then(function(response){
+    gamers = response.data;
+    listGamers = "";
+    for(gamer in gamers){
+
+      listGamers += `<div class="col-4 text-center">     
+                    <div class="alert alert-primary" role="alert">
+                    <button class="btn btn-link btn-block">`+gamers[gamer].nickname+`</button>
+                    </div>
+                    </div>`;
+    }
+    
+    document.querySelector('#jogadores').innerHTML = listGamers;
+
+  })
+
 }
 
 function fecharJogo(game){
@@ -146,7 +149,7 @@ function fecharJogo(game){
       id:game
     }
   }).then(function(response){
-
+    
   })
 }
 
@@ -163,7 +166,7 @@ document.querySelector('#adicionarJogadorJogo').addEventListener("click",functio
         game_id:game_id
       }
     }).then(function(response){
-
+      carregarJogadores();
     })
 
 })
