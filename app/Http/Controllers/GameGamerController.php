@@ -39,8 +39,25 @@ class GameGamerController extends Controller
         $gameGamer = new GameGamer();
         $gameGamer->game_id = $request->input('game_id');
         $gameGamer->gamer_id = $request->input('gamer_id');
-        $gameGamer->save();
-        return response()->json($gameGamer,201);
+        
+        if($this->checkGameGamer($gameGamer)){            
+            return response()->json($gameGamer,403);
+        }else{            
+            $gameGamer->save();
+            return response()->json($gameGamer,201);
+        }
+        
+    }
+    /**
+     * Verifica se game e gamer ja existe
+     * @return boolean
+     */
+    public function checkGameGamer($gameG){
+       
+        $game_id = $gameG->game_id;
+        $gamer_id = $gameG->gamer_id;
+
+        return $gameGamer = GameGamer::where(['game_id'=>$game_id,'gamer_id'=>$gamer_id])->count();
     }
 
       /**
