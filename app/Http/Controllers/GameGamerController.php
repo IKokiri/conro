@@ -136,6 +136,7 @@ class GameGamerController extends Controller
      * Criação de usuário quando não existe e adição no jogo
      */
     public function createGamerGame(Request $request){
+
         /**
          * Busca no banco existencia de gamer
          */
@@ -144,7 +145,7 @@ class GameGamerController extends Controller
         $gamer = new GamerController();
         
         $gr = $gamer->findGamerNick($request);
-        
+      
         /**
          * CASO O USUÁRIO NÃO EXISTA NO BANCO, SERÁ CRIADO
          */
@@ -152,7 +153,7 @@ class GameGamerController extends Controller
             $gr = $gamer->store($request);
             $gr = json_decode($gr->getContent());
         }
-
+        
         $request->request->add(['gamer_id'=>$gr->id]);
 
         $gameGamer = $this->store($request);

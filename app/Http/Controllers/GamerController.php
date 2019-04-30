@@ -45,13 +45,11 @@ class GamerController extends Controller
      * buscar gamer pelo nome
      */
     function findGamerNick(Request $request){
+
         $nickname = $request->nickname;
 
-        $gamer = Gamer::firstOrFail()->where([
-            'nickname' => $nickname
-        ])->get()->first();
-
-        return $gamer;
+        return Gamer::where(['nickname'=>$nickname])->first();
+        
     }
 
     /**

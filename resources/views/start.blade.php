@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col-3">
         <button type="button" class="btn btn-light">
-          <i class="fas fa-dice" id="numJogo"></i>
+          <i class="fas fa-dice" data-id="" id="numJogo"></i>
         </button>
       </div>
 
@@ -55,7 +55,7 @@
         </div>  
         <div class="col-6">        
           <div class="alert alert-secondary" role="alert">
-            <button class="btn btn-link" id="adicionarJogador">
+            <button class="btn btn-link" id="adicionarJogadorJogo">
               <i class="fas fa-plus"></i>
             </button>
           </div>
@@ -116,7 +116,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script>
-var url = "http://localhost:8000/";
+// var url = "http://localhost:8000/";
+var url="";
 
 function criarJogo(){
   axios({
@@ -130,6 +131,7 @@ function criarJogo(){
     document.getElementById('numJogo').innerHTML = dados.id;
     document.getElementById('valorGame').innerHTML = dados.price;
     document.querySelector('#fecharJogo').setAttribute('data-id',dados.id);
+    document.querySelector('#numJogo').setAttribute('data-id',dados.id);
   }).catch(function(response){
     
   })
@@ -139,7 +141,7 @@ function fecharJogo(game){
 
   axios({
     method:'post',
-    url: url+'api/game/close',
+    url: url+'/api/game/close',
     data:{
       id:game
     }
@@ -148,5 +150,22 @@ function fecharJogo(game){
   })
 }
 
+document.querySelector('#adicionarJogadorJogo').addEventListener("click",function(){
+    
+    nickname = document.querySelector("#nickname").value;
+    game_id = document.querySelector("#numJogo").getAttribute('data-id');
+    
+    axios({
+      method:'post',
+      url: url+'/api/gameGamer/createGamerGame',
+      data:{
+        nickname:nickname,
+        game_id:game_id
+      }
+    }).then(function(response){
+
+    })
+
+})
 
 </script>
