@@ -80,8 +80,6 @@
     <div class="row" id="jogadores">
     </div>
     
-
-
   </div>
 
   <div class="card-footer text-muted">
@@ -161,11 +159,11 @@ function carregarJogadoresJogo(game_id){
     for(gamer in gamers){
 
         tbody += `<tr>
-        <th><i class="fas fa-minus"></i></th>
+        <td onclick='subScore(`+gamers[gamer].gamer_id+`,`+gamers[gamer].game_id+`)'><i class="fas fa-minus"></i></td>
         <td>`+gamers[gamer].nickname+`</td>
         <td>`+gamers[gamer].score+`</td>
         <td>0</td>
-        <td><i class="fas fa-plus"></i></td>
+        <td onclick='addScore(`+gamers[gamer].gamer_id+`,`+gamers[gamer].game_id+`)'><i class="fas fa-plus"></i></td>
         </tr>`;
     }
     document.querySelector("table>tbody").innerHTML = tbody;
@@ -187,8 +185,8 @@ function fecharJogo(game){
 
 document.querySelector('#adicionarJogadorJogo').addEventListener("click",function(){
     
-    nickname = document.querySelector("#nickname").value;
-    game_id = document.querySelector("#numJogo").getAttribute('data-id');
+  nickname = document.querySelector("#nickname").value;
+  game_id = document.querySelector("#numJogo").getAttribute('data-id');
     
    adicionarJogadorJogo(nickname,game_id);
 
@@ -209,4 +207,29 @@ function adicionarJogadorJogo(nickname,game_id){
     })
 }
 
+function subScore(gamer_id,game_id){
+  axios({
+    method:'post',
+    url:url+'/api/gameGamer/subScore',
+    data:{
+      gamer_id:gamer_id,
+      game_id:game_id
+    }
+  }).then(function(response){
+    carregarJogadoresJogo(game_id)
+  })
+}
+
+function addScore(gamer_id,game_id){
+  axios({
+    method:'post',
+    url:url+'/api/gameGamer/addScore',
+    data:{
+      gamer_id:gamer_id,
+      game_id:game_id
+    }
+  }).then(function(response){
+    carregarJogadoresJogo(game_id)
+  })
+}
 </script>
