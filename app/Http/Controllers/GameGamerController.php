@@ -5,6 +5,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\GamerController;
 use Illuminate\Http\Request;
 use App\GameGamer;
+use Illuminate\Support\Facades\DB;
 
 
 class GameGamerController extends Controller
@@ -168,8 +169,10 @@ class GameGamerController extends Controller
      */
     public function findGamers($id){
 
-        // $gameGamers = GameGamer::where(['game_id'=>2])->get();
-        $gameGamers = GameGamer::find(2);
-        return $gameGamers->gamers;
+        $dados = DB::table('game_gamers')
+        ->join('gamers','gamer_id','=','gamers.id')
+        ->select('gamers.nickname','gamers.id')->where(['game_id'=>$id])->get();
+        
+        return response($dados,200);
     }
 }
