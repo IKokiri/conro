@@ -55,13 +55,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th><i class="fas fa-minus"></i></th>
-            <td>LZ</td>
-            <td>1</td>
-            <td>0.5</td>
-            <td><i class="fas fa-plus"></i></td>
-          </tr>
+          
         </tbody>
       </table>  
         <!-- ADICIONAR JOGADOR AO JOGO -->
@@ -129,6 +123,7 @@ function criarJogo(){
     document.querySelector('#fecharJogo').setAttribute('data-id',dados.id);
     document.querySelector('#numJogo').setAttribute('data-id',dados.id);
     carregarJogadores();
+    carregarJogadoresJogo(dados.id);
   }).catch(function(response){
     
   })
@@ -155,6 +150,27 @@ function carregarJogadores(){
 
   })
 
+}
+
+function carregarJogadoresJogo(game_id){
+  axios({
+    method:'get',
+    url:url+'api/gameGamer/gamers/'+game_id
+  }).then(function(response){
+    gamers = response.data;
+    tbody = "";
+    for(gamer in gamers){
+
+        tbody += `<tr>
+        <th><i class="fas fa-minus"></i></th>
+        <td>`+gamers[gamer].nickname+`</td>
+        <td>`+gamers[gamer].score+`</td>
+        <td>0</td>
+        <td><i class="fas fa-plus"></i></td>
+        </tr>`;
+    }
+    document.querySelector("table>tbody").innerHTML = tbody;
+  })
 }
 
 function fecharJogo(game){
@@ -184,6 +200,8 @@ document.querySelector('#adicionarJogadorJogo').addEventListener("click",functio
       }
     }).then(function(response){
       carregarJogadores();
+      game_id = response.data.original.game_id
+      carregarJogadoresJogo(game_id);
     })
 
 })
