@@ -171,7 +171,7 @@ class GameGamerController extends Controller
 
         $dados = DB::table('game_gamers')
         ->join('gamers','gamer_id','=','gamers.id')
-        ->select('gamers.nickname','gamers.id')->where(['game_id'=>$id])->get();
+        ->select('gamers.nickname','gamers.id','games.score')->where(['game_id'=>$id])->get();
         
         return response($dados,200);
     }
