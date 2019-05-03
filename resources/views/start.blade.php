@@ -43,30 +43,47 @@
   <div class="card-body">
 
     <div class="row">
-        <div class="col-12">        
-          <div class="alert alert-primary" role="alert">
-            <button class="btn btn-link btn-block">LZ</button>
-          </div>
-        </div>   
-        <div class="col-6">        
-          <div class="alert alert-primary" role="alert">
-            <input class="form-control" id="nickname" type="text">
-          </div>
-        </div>  
-        <div class="col-6">        
-          <div class="alert alert-secondary" role="alert">
-            <button class="btn btn-link" id="adicionarJogadorJogo">
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
-        </div>  
+      <!-- JOGADORES CADASTRADOS PARA JOGO ATUAL -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"><i class="fas fa-minus"></i></th>
+            <th scope="col">Sigla</th>
+            <th scope="col">Pontos</th>
+            <th scope="col">Total</th>
+            <th scope="col"><i class="fas fa-plus"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><i class="fas fa-minus"></i></th>
+            <td>LZ</td>
+            <td>1</td>
+            <td>0.5</td>
+            <td><i class="fas fa-plus"></i></td>
+          </tr>
+        </tbody>
+      </table>  
+        <!-- ADICIONAR JOGADOR AO JOGO -->
+      <div class="col-6">        
+        <div class="alert alert-primary" role="alert">
+          <input class="form-control" id="nickname" type="text">
+        </div>
+      </div>  
+      <div class="col-6">        
+        <div class="alert alert-secondary" role="alert">
+          <button class="btn btn-link" id="adicionarJogadorJogo">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div> 
+
     </div>
 
     <hr>
 
+    <!-- TODOS OS JOGADORES CADASTRADOS -->
     <div class="row" id="jogadores">
-      
-      
     </div>
     
 
