@@ -162,7 +162,7 @@ function carregarJogadoresJogo(game_id){
         <td onclick='subScore(`+gamers[gamer].gamer_id+`,`+gamers[gamer].game_id+`)'><i class="fas fa-minus"></i></td>
         <td>`+gamers[gamer].nickname+`</td>
         <td>`+gamers[gamer].score+`</td>
-        <td>0</td>
+        <td>`+gamers[gamer].total+`</td>
         <td onclick='addScore(`+gamers[gamer].gamer_id+`,`+gamers[gamer].game_id+`)'><i class="fas fa-plus"></i></td>
         </tr>`;
     }

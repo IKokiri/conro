@@ -180,6 +180,10 @@ class GameGamerController extends Controller
         ->join('gamers','gamer_id','=','gamers.id')
         ->select('gamers.nickname','gamers.id','game_gamers.score','game_gamers.game_id','game_gamers.gamer_id')->where(['game_id'=>$id])->get();
         
+        $game = new GameController();
+
+        $dados = $game->calcular($dados);
+        
         return response($dados,200);
     }
 }

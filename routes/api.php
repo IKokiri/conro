@@ -24,6 +24,7 @@ Route::prefix('game')->group(function(){
     Route::delete('remover/{id}','GameController@destroy');
     Route::post('close','GameController@closeGame');
     Route::post('openGameClosed','GameController@openGameClosed');
+    
 });
 
 Route::prefix('gamer')->group(function(){

@@ -158,6 +158,34 @@ class GameController extends Controller
 
     }
 
+    /**
+     * CALCULA O VALOR TOTAL
+     */
+    public function calcular($dados){
+
+        $game_id = $dados[0]->game_id;
+        
+        $game = Game::find($game_id);
+
+        $valorGame = $game->price;
+
+        $nPlayer = $dados->count();
+        $partidasTotais = 0;
+
+        foreach($dados as $d){
+            $partidasTotais += $d->score;
+        }
+
+        foreach($dados as $d){
+            $d->total = ($d->score*($nPlayer-1)*($valorGame))-(($partidasTotais-$d->score)*($valorGame));
+        }
+
+        return $dados;
+    }
+
+ 
+    
+
 
 
 }
