@@ -6,6 +6,7 @@ use App\Http\Controllers\GamerController;
 use Illuminate\Http\Request;
 use App\GameGamer;
 
+
 class GameGamerController extends Controller
 {
     /**
@@ -160,5 +161,15 @@ class GameGamerController extends Controller
         
         return response()->json($gameGamer,201);
         
+    }
+
+    /**
+     * busca todos os jogadores de um jogo
+     */
+    public function findGamers($id){
+
+        // $gameGamers = GameGamer::where(['game_id'=>2])->get();
+        $gameGamers = GameGamer::find(2);
+        return $gameGamers->gamers;
     }
 }
