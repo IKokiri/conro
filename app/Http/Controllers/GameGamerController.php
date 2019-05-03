@@ -70,7 +70,10 @@ class GameGamerController extends Controller
      */
     public function addScore(Request $request){
 
-        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>1])->where(['gamer_id'=>1])->first();
+        $game_id = $request->input('game_id');
+        $gamer_id = $request->input('gamer_id');
+
+        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>$game_id])->where(['gamer_id'=>$gamer_id])->first();
         $gameGamer->score++;
         $gameGamer->save();
         return response()->json($gameGamer,200);
@@ -84,7 +87,11 @@ class GameGamerController extends Controller
      */
     public function subScore(Request $request){
 
-        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>1])->where(['gamer_id'=>1])->first();
+
+        $game_id = $request->input('game_id');
+        $gamer_id = $request->input('gamer_id');
+
+        $gameGamer = GameGamer::firstOrFail()->where(['game_id'=>$game_id])->where(['gamer_id'=>$gamer_id])->first();
         $gameGamer->score--;
         $gameGamer->save();
         return response()->json($gameGamer,200);
