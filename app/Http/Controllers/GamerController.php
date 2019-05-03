@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gamer;
+use Illuminate\Support\Facades\DB;
 class GamerController extends Controller
 {
     /**
@@ -13,7 +14,7 @@ class GamerController extends Controller
      */
     public function index()
     {
-        return $gamers = Gamer::all();
+        return $gamers = DB::table('gamers')->orderBy('nickname','asc')->get();
     }
 
     /**

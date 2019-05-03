@@ -136,13 +136,12 @@ function carregarJogadores(){
     url: url+'api/gamer'
   }).then(function(response){
     gamers = response.data;
+    game_id = document.querySelector('#numJogo').getAttribute('data-id');
     listGamers = "";
     for(gamer in gamers){
 
       listGamers += `<div class="col-4 text-center">     
-                    <div class="alert alert-primary" role="alert">
-                    <button class="btn btn-link btn-block">`+gamers[gamer].nickname+`</button>
-                    </div>
+                      <div class="alert alert-primary" onclick='adicionarJogadorJogo("`+gamers[gamer].nickname+`",`+game_id+`)' role="alert">`+gamers[gamer].nickname+`</div>
                     </div>`;
     }
     
@@ -191,7 +190,12 @@ document.querySelector('#adicionarJogadorJogo').addEventListener("click",functio
     nickname = document.querySelector("#nickname").value;
     game_id = document.querySelector("#numJogo").getAttribute('data-id');
     
-    axios({
+   adicionarJogadorJogo(nickname,game_id);
+
+})
+
+function adicionarJogadorJogo(nickname,game_id){
+  axios({
       method:'post',
       url: url+'/api/gameGamer/createGamerGame',
       data:{
@@ -203,7 +207,6 @@ document.querySelector('#adicionarJogadorJogo').addEventListener("click",functio
       game_id = response.data.original.game_id
       carregarJogadoresJogo(game_id);
     })
-
-})
+}
 
 </script>
