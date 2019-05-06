@@ -170,6 +170,7 @@ class GameController extends Controller
         $valorGame = $game->price;
 
         $nPlayer = $dados->count();
+        
         $partidasTotais = 0;
 
         foreach($dados as $d){

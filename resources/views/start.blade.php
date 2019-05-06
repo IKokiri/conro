@@ -128,20 +128,32 @@ function criarJogo(){
     
   })
 }
+setTimeout(function(){
+  carregarJogadores()
+},1000)
 
 function carregarJogadores(){
 
   axios({
     method: 'get',
-    url: url+'api/gamer'
+    url: url+'api/gameGamer/gamersValues'
   }).then(function(response){
+    
     gamers = response.data;
+    
     game_id = document.querySelector('#numJogo').getAttribute('data-id');
+
     listGamers = "";
     for(gamer in gamers){
 
-      listGamers += `<div class="col-4 text-center">     
-                      <div class="alert alert-primary" onclick='adicionarJogadorJogo("`+gamers[gamer].nickname+`",`+game_id+`)' role="alert">`+gamers[gamer].nickname+`</div>
+      total = gamers[gamer][0].total.toFixed(2);
+      color = 'primary';
+      if(gamers[gamer][0].total < 0){
+        color = 'danger';
+      }
+
+      listGamers += `<div class="col-6 text-center">     
+                      <div class="alert alert-`+color+`" onclick='adicionarJogadorJogo("`+gamers[gamer][0].nickname+`",`+game_id+`)' role="alert"><h5>`+gamers[gamer][0].nickname+'</h5><h5>'+total+'</h5>'+`</div>
                     </div>`;
     }
     

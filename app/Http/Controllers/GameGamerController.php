@@ -186,4 +186,68 @@ class GameGamerController extends Controller
         
         return response($dados,200);
     }
+
+    /**
+     * busca jogadores calculando total de todas as partidas
+     */
+    public function gamersValuesMatch(){
+        
+        $dados = DB::table('game_gamers')
+        ->join('gamers','gamer_id','=','gamers.id')
+        ->join('games','game_id','=','games.id')
+        ->select('game_gamers.gamer_id','game_gamers.game_id','game_gamers.score','gamers.nickname','games.price')->get();
+        
+        $games = $this->separateGames($dados);
+        
+        $gameC = new GameController();
+
+        $gamesArray = [];
+
+        foreach($games as $game){
+
+            $gamesArray[] = $gameC->calcular(collect($game));
+
+        }
+
+        $gameGamersValues = $this->unionGames($gamesArray);
+        
+        return response($gameGamersValues,200);
+
+    }
+
+    /**
+     * separa um array com jogos diferentes em grupos
+     */
+    public function separateGames($dados){
+        
+        $games = [];
+
+        foreach($dados as $d){
+            $games[$d->game_id][] = $d;
+        }
+
+        return $games;
+    }
+    
+    /**
+     * faz a união dos jogos
+     */
+    public function unionGames($games){
+        $array = [];
+
+        foreach($games as $game){
+            foreach($game as $g){
+                if(isset($array[$g->nickname])){
+                    $total = $array[$g->nickname][0]->total;
+                    $array[$g->nickname][0]->total = $total + $g->total;
+                }else{
+                    $array[$g->nickname][] = $g;
+                }
+                
+            }
+        }
+
+        return $array;
+    }
+    
 }

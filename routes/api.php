@@ -38,5 +38,6 @@ Route::prefix('gameGamer')->group(function(){
     Route::post('subScore/','GameGamerController@subScore');
     Route::post('createGamerGame/','GameGamerController@createGamerGame');
     Route::get('gamers/{id}','GameGamerController@findGamers');
+    Route::get('gamersValues/','GameGamerController@gamersValuesMatch');
 });
 
