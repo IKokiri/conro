@@ -21,7 +21,7 @@
       </div>
 
       <div class="col-3">
-        <button type="button" class="btn btn-light">
+        <button type="button" id="headerAddJogador" class="btn btn-light">
           <i class="fas fa-user-plus"></i>
         </button>
       </div>
@@ -44,7 +44,9 @@
 
     <div class="row">
       <!-- JOGADORES CADASTRADOS PARA JOGO ATUAL -->
-      <table class="table table-striped">
+
+
+      <table class="table table-striped tableJogadoresJogo">
         <thead>
           <tr>
             <th scope="col"><i class="fas fa-minus"></i></th>
@@ -59,32 +61,32 @@
         </tbody>
       </table>  
         <!-- ADICIONAR JOGADOR AO JOGO -->
-      <div class="col-6">        
-        <div class="alert alert-primary" role="alert">
-          <input class="form-control" id="nickname" type="text">
-        </div>
-      </div>  
-      <div class="col-6">        
-        <div class="alert alert-secondary" role="alert">
-          <button class="btn btn-link" id="adicionarJogadorJogo">
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-      </div> 
+      <div class='col-12 row divAddJogador'>
+        <div class="col-6 ">        
+          <div class="alert alert-primary" role="alert">
+            <input class="form-control" id="nickname" type="text">
+          </div>
+        </div>  
+        <div class="col-6">        
+          <div class="alert alert-secondary" role="alert">
+            <button class="btn btn-link" id="adicionarJogadorJogo">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div> 
+      </div>
 
     </div>
 
-    <hr>
-
     <!-- TODOS OS JOGADORES CADASTRADOS -->
-    <div class="row" id="jogadores">
+    <div class="row divJogadoresCadastrados" id="jogadores">
     </div>
     
   </div>
 
-  <div class="card-footer text-muted">
+  <div class="card-footer text-muted divAbrirJogo">
   <footer>
-  
+
   <button type="button" class="btn btn-light btn-block" onclick="criarJogo()">
     <i class="fas fa-plus"></i>
   </button>
@@ -179,7 +181,13 @@ function fecharJogo(game){
       id:game
     }
   }).then(function(response){
-    
+    document.querySelector("table>tbody").innerHTML = "";
+    document.querySelector(".divAddJogador").style.visibility = "collapse";
+    document.querySelector(".divAbrirJogo").style.visibility = "initial";
+    document.querySelector(".divJogadoresCadastrados").style.visibility = "initial";
+    document.querySelector(".tableJogadoresJogo").style.visibility = "collapse";
+    carregarJogadores();
+
   })
 }
 
@@ -188,7 +196,7 @@ document.querySelector('#adicionarJogadorJogo').addEventListener("click",functio
   nickname = document.querySelector("#nickname").value;
   game_id = document.querySelector("#numJogo").getAttribute('data-id');
     
-   adicionarJogadorJogo(nickname,game_id);
+  adicionarJogadorJogo(nickname,game_id);
 
 })
 
@@ -232,4 +240,28 @@ function addScore(gamer_id,game_id){
     carregarJogadoresJogo(game_id)
   })
 }
+
+document.querySelector("#numJogo").addEventListener('click',function(){
+  
+  document.querySelector(".divAddJogador").style.visibility = "collapse";
+  document.querySelector(".divAbrirJogo").style.visibility = "collapse";
+  document.querySelector(".divJogadoresCadastrados").style.visibility = "collapse";
+  document.querySelector(".tableJogadoresJogo").style.visibility = "initial";
+
+})
+document.querySelector("#headerAddJogador").addEventListener('click',function(){
+  document.querySelector(".divAddJogador").style.visibility = "initial";
+  document.querySelector(".divAbrirJogo").style.visibility = "collapse";
+  document.querySelector(".divJogadoresCadastrados").style.visibility = "initial";
+  document.querySelector(".tableJogadoresJogo").style.visibility = "initial";
+  
+})
+
+document.querySelector("#fecharJogo").addEventListener('click',function(){
+  document.querySelector(".divAddJogador").style.visibility = "initial";
+  document.querySelector(".divAbrirJogo").style.visibility = "initial";
+  document.querySelector(".divJogadoresCadastrados").style.visibility = "initial";
+  document.querySelector(".tableJogadoresJogo").style.visibility = "initial";
+  
+})
 </script>
