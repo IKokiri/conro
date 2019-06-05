@@ -1,4 +1,4 @@
-{
+chmod -R 777{
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
